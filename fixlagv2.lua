@@ -12,7 +12,7 @@ local t = w.Terrain
 local player = g.Players.LocalPlayer
 local sv = Instance.new("ScreenGui")
 local BG = Instance.new("Frame")
-
+local RunService = g:GetService("RunService")
 
 
 lib:AddToggle("Fast mode", function(state)
