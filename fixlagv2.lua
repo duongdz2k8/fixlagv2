@@ -92,18 +92,9 @@ lib:AddToggle("Disable GPU", function(gpu)
     if gpu then
         disableGPUThread = task.spawn(function() 
             RunService:Set3dRenderingEnabled(false)
-            sv.Name = "sv"
-            sv.Parent = g.CoreGui
-            sv.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
-
-            BG.Name = "BG"
-            BG.Parent = sv
-            BG.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-            BG.Position = UDim2.new(0, 0, -0.0502008051, 0)
-            BG.Size = UDim2.new(1, 0, 1.10040164, 0)
-            BG.Visible = true
         end)
     else
-        BG.Visible = false
-        task.cancel(disableGPUThread) end
+        RunService:Set3dRenderingEnabled(true)
+        task.cancel(disableGPUThread) 
+    end
 end, false)
