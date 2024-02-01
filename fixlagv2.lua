@@ -8,6 +8,8 @@ local g = game
 local w = g.Workspace
 local l = g.Lighting
 local t = w.Terrain
+local player = g.Players.LocalPlayer
+local cam = w.CurrentCamera
 
 lib:AddToggle("Fast mode", function(state)
     if state then 
@@ -81,4 +83,14 @@ lib:AddToggle("Fast mode", function(state)
             end)
         end)
     else task.cancel(fastModeThread) end
+end, false)
+lib:AddToggle("Disable GPU", function(gpu)
+    if gpu then
+        disableGPUThread = task.spawn(function() 
+            local whiteScreen = Instance.new("Frame")
+            whiteScreen.Size = UDim2.new(1, 0, 1, 0)
+            whiteScreen.BackgroundColor3 = Color3.new(1, 1, 1)
+            whiteScreen.Parent = player:WaitForChild("PlayerGui")
+        end)
+    else task.cancel(disableGPUThread) end
 end, false)
