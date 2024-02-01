@@ -1,5 +1,5 @@
 local lib = loadstring(game:HttpGet("https://raw.githubusercontent.com/AZYsGithub/Arceus-X-UI-Library/main/source.lua"))()
-lib:SetTitle("Auto sex | made by @3wex (1805)")
+lib:SetTitle("Fix Lag V2")
 lib:SetIcon("http://www.roblox.com/asset/?id=9178187770")
 
 local fastModeThread
@@ -87,7 +87,7 @@ end, false)
 lib:AddToggle("Disable GPU", function(gpu)
     if gpu then
         disableGPUThread = task.spawn(function() 
-            camera:SetRenderingThrottlingEnabled(false)
+            cam:SetRenderingThrottlingEnabled(false)
             local whiteScreen = Instance.new("Frame")
             whiteScreen.Size = UDim2.new(1, 0, 1, 0)
             whiteScreen.BackgroundColor3 = Color3.new(1, 1, 1)
