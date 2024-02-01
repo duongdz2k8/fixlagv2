@@ -98,10 +98,12 @@ lib:AddToggle("Disable GPU", function(gpu)
 
             BG.Name = "BG"
             BG.Parent = sv
-            BG.BackgroundColor3 = Color3.fromRGB(7, 47, 95)
+            BG.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
             BG.Position = UDim2.new(0, 0, -0.0502008051, 0)
             BG.Size = UDim2.new(1, 0, 1.10040164, 0)
             BG.Visible = true
         end)
-    else task.cancel(disableGPUThread) end
+    else
+        BG.Visible = false
+        task.cancel(disableGPUThread) end
 end, false)
