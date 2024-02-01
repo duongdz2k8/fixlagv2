@@ -9,7 +9,19 @@ local w = g.Workspace
 local l = g.Lighting
 local t = w.Terrain
 local player = g.Players.LocalPlayer
-local cam = w.CurrentCamera
+local sv = Instance.new("ScreenGui")
+local BG = Instance.new("Frame")
+
+sv.Name = "sv"
+sv.Parent = g.CoreGui
+sv.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+BG.Name = "BG"
+BG.Parent = sv
+BG.BackgroundColor3 = Color3.fromRGB(7, 47, 95)
+BG.Position = UDim2.new(0, 0, -0.0502008051, 0)
+BG.Size = UDim2.new(1, 0, 1.10040164, 0)
+BG.Visible = false
 
 lib:AddToggle("Fast mode", function(state)
     if state then 
@@ -87,11 +99,8 @@ end, false)
 lib:AddToggle("Disable GPU", function(gpu)
     if gpu then
         disableGPUThread = task.spawn(function() 
-            cam:SetRenderingThrottlingEnabled(false)
-            local whiteScreen = Instance.new("Frame")
-            whiteScreen.Size = UDim2.new(1, 0, 1, 0)
-            whiteScreen.BackgroundColor3 = Color3.new(1, 1, 1)
-            whiteScreen.Parent = player:WaitForChild("PlayerGui")
+            RunService:Set3dRenderingEnabled(false)
+            BG.Visible = true
         end)
     else task.cancel(disableGPUThread) end
 end, false)
