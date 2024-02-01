@@ -2,6 +2,7 @@ local lib = loadstring(game:HttpGet("https://raw.githubusercontent.com/AZYsGithu
 lib:SetTitle("Fix Lag V2")
 lib:SetIcon("http://www.roblox.com/asset/?id=9178187770")
 
+local disableGPUThread
 local fastModeThread
 local decalsyeeted = true -- Leaving this on makes games look shitty but the fps goes up by at least 20.
 local g = game
@@ -12,16 +13,7 @@ local player = g.Players.LocalPlayer
 local sv = Instance.new("ScreenGui")
 local BG = Instance.new("Frame")
 
-sv.Name = "sv"
-sv.Parent = g.CoreGui
-sv.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
-BG.Name = "BG"
-BG.Parent = sv
-BG.BackgroundColor3 = Color3.fromRGB(7, 47, 95)
-BG.Position = UDim2.new(0, 0, -0.0502008051, 0)
-BG.Size = UDim2.new(1, 0, 1.10040164, 0)
-BG.Visible = false
 
 lib:AddToggle("Fast mode", function(state)
     if state then 
@@ -100,6 +92,15 @@ lib:AddToggle("Disable GPU", function(gpu)
     if gpu then
         disableGPUThread = task.spawn(function() 
             RunService:Set3dRenderingEnabled(false)
+            sv.Name = "sv"
+            sv.Parent = g.CoreGui
+            sv.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+            BG.Name = "BG"
+            BG.Parent = sv
+            BG.BackgroundColor3 = Color3.fromRGB(7, 47, 95)
+            BG.Position = UDim2.new(0, 0, -0.0502008051, 0)
+            BG.Size = UDim2.new(1, 0, 1.10040164, 0)
             BG.Visible = true
         end)
     else task.cancel(disableGPUThread) end
