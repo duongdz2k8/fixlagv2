@@ -13,7 +13,7 @@ local player = g.Players.LocalPlayer
 local RunService = g:GetService("RunService")
 
 
-lib:AddToggle("Fast mode", function(state)
+lib:AddToggle("Fast mode (Can't disable)", function(state)
     if state then 
         fastModeThread= task.spawn(function() 
             sethiddenproperty(l,"Technology",2)
