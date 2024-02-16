@@ -2,6 +2,7 @@ local lib = loadstring(game:HttpGet("https://raw.githubusercontent.com/AZYsGithu
 lib:SetTitle("Fix Lag V2")
 lib:SetIcon("http://www.roblox.com/asset/?id=9178187770")
 
+local antiAFKThread
 local disableGPUThread
 local fastModeThread
 local decalsyeeted = true -- Leaving this on makes games look shitty but the fps goes up by at least 20.
@@ -11,6 +12,13 @@ local l = g.Lighting
 local t = w.Terrain
 local player = g.Players.LocalPlayer
 local RunService = g:GetService("RunService")
+local services = setmetatable({}, {__index = function(t, k)
+    local service = game:GetService(k)
+    t[k] = service
+    return service
+end})
+local Players = services.Players
+local localPlayer = Players.LocalPlayer
 
 
 lib:AddToggle("Fast mode (Can't disable)", function(state)
@@ -94,5 +102,18 @@ lib:AddToggle("Disable GPU", function(gpu)
     else
         RunService:Set3dRenderingEnabled(true)
         task.cancel(disableGPUThread) 
+    end
+end, false)
+lib:AddToggle("Anti AFK", function(antiafk)
+    if antiafk then
+        antiAFKThread = task.spawn(function() 
+            for _, connection in next, getconnections(localPlayer.Idled) do
+                connection:Disable()
+            end
+            warn("Disabled idle connections")
+            print(24)
+        end)
+    else
+        task.cancel(antiAFKThread)
     end
 end, false)
